@@ -1,0 +1,27 @@
+version: '3'
+
+# START
+# docker-compose up -d
+#
+# SHUTDOWN
+# docker-compose down
+
+services:
+  mongodb:
+    image: mongo:3.6-stretch
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo-data-db:/data/db
+      - mongo-data-configdb:/data/configdb
+  redis:
+    image: redis:5.0-stretch
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis-data:/data
+
+volumes:
+  mongo-data-db:
+  mongo-data-configdb:
+  redis-data:
