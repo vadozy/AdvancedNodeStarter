@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "private": true,
+  "jest": {
+    "setupTestFrameworkScriptFile": "./tests/setup.js"
+  },
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js --ignore tests",
@@ -23,7 +26,7 @@
     "express": "^4.16.4",
     "jest": "^23.6.0",
     "migrate-mongoose": "^3.2.2",
-    "mongoose": "^5.3.13",
+    "mongoose": "^5.4.3",
     "nodemon": "^1.18.6",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
