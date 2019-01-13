@@ -5,7 +5,7 @@ const userFactory = require('../factories/userFactory');
 class CustomPage {
     static async build() {
         const browser = await puppeteer.launch({
-            headless: false
+            headless: true
         });
 
         const page = await browser.newPage();
@@ -40,10 +40,14 @@ class CustomPage {
         });
     
         // refresh the page
-        await this.goto('http://localhost:3000');
+        await this.goto('http://localhost:3000/blogs');
     
-        // Next pause seems to be NOT NEEDED 
-        //await this.waitFor('a[href="/auth/logout"]');
+        // Next pause seemed to be NOT NEEDED, until test started using mongoose
+        await this.waitFor('a[href="/auth/logout"]');
+    }
+
+    async getContentsOf(selector) {
+        return await this.page.$eval(selector, el => el.innerHTML);
     }
 }
 
