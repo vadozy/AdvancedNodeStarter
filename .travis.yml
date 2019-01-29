@@ -1,0 +1,29 @@
+language: node_js
+node_js:
+  - "10"
+dist: trusty
+services:
+  - mongodb
+  - redis-server
+
+env:
+  - NODE_ENV=ci PORT=3000  # express port
+
+# cache speeds up the build
+cache:
+  directories:
+    - node_modules
+    - client/node_modules
+
+install:
+  - npm install
+  - npm run build
+
+script:
+  - nohup npm run start &
+  - sleep 3  # sleep for 3 seconds, give server time to start
+  - npm run test
+
+notifications:
+  slack:
+    on_success: always
